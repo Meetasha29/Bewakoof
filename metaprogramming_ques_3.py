@@ -13,6 +13,21 @@ Here is an example to show how we can create our own metaclass to create a new m
 """
 
 
-def added_method():
+def added_method(self):
     print("this is a new method")
 
+
+class A:
+    def existing_method(self):
+        print("this is already existing method")
+
+
+MyClass = type('MyClass', (A, ), dict(added_method=added_method))
+
+# testing
+my_class_obj = MyClass()
+
+print(type(my_class_obj))
+
+my_class_obj.added_method()
+my_class_obj.existing_method()
